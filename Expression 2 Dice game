@@ -1,0 +1,59 @@
+@name Dice game
+@inputs A
+@outputs P1 P2
+@persist P1d1 P1d2 P2d1 P2d2 R C
+
+if(A){
+    P1d1 = floor(random(1,7))
+    P1d2 = floor(random(1,7))
+    P1 = P1d1 + P1d2
+}
+
+if(A){
+    P2d1 = floor(random(1,7))
+    P2d2 = floor(random(1,7))
+    P2 = P2d1 + P2d2
+}
+if(A){
+    runOnTick(10000)
+    R = R + 10
+    holoAng(1,ang(vec(R,R,R)))
+    holoAng(2,ang(vec(-R,-R,-R)))
+    holoAng(3,ang(vec(R,R,R)))
+    holoAng(4,ang(vec(-R,-R,-R)))
+    C = 0
+    holoColor(1,vec(255,255,255))
+    holoColor(2,vec(255,255,255))
+    holoColor(3,vec(255,255,255))
+    holoColor(4,vec(255,255,255))
+} else {
+    C = 1
+}
+
+if(P1 < P2 & C){
+    holoColor(1,vec(0,255,0))
+    holoColor(2,vec(0,255,0))
+    holoColor(3,vec(255,0,0))
+    holoColor(4,vec(255,0,0))
+} elseif (P1 > P2 & C){
+    holoColor(1,vec(255,0,0))
+    holoColor(2,vec(255,0,0))
+    holoColor(3,vec(0,255,0))
+    holoColor(4,vec(0,255,0))
+} elseif (P1 == P2 & C){
+    holoColor(1,vec(0,0,255))
+    holoColor(2,vec(0,0,255))
+    holoColor(3,vec(0,0,255))
+    holoColor(4,vec(0,0,255))
+}
+
+holoCreate(1)
+holoPos(1,entity():pos()+vec(10,20,10))
+holoCreate(2)
+holoPos(2,entity():pos()+vec(-10,20,10))
+holoCreate(3)
+holoPos(3,entity():pos()+vec(10,-20,10))
+holoCreate(4)
+holoPos(4,entity():pos()+vec(-10,-20,10))
+
+#[DBT]
